@@ -4,47 +4,72 @@ import (
 	"fmt"
 )
 
-/* Remove the third repeated character from a given string
-   aaabbbccc -> aabbcc
+/* Calculate the minimal rotation of arrows to make the string all equal
+   >>><<v^ -> 4
 */
 
-func removeThird(S string) string {
-	result := ""
+func minRotArrow(S string) int {
+	result := 0
+	max := 0
+	totArrows := 0
 
-	rep := 0
-	for i, c := range S {
+	uA := 0
+	dA := 0
+	lA := 0
+	rA := 0
 
-		//fmt.Println(i, c)
-		if i == 0 {
-			result = result + string(c)
-		} else if i > 0 {
-			if S[i-1] == S[i] {
-				rep++
-			} else {
-				rep = 0
-			}
-			if rep < 2 {
-				result = result + string(c)
-			}
+	for _, ch := range S {
+		if ch == '^' {
+			totArrows++
+			uA++
+		} else if ch == 'v' {
+			totArrows++
+			dA++
+		} else if ch == '<' {
+			totArrows++
+			lA++
+		} else if ch == '>' {
+			totArrows++
+			rA++
 		}
-
 	}
+
+	sums := [4]int{uA, dA, lA, rA}
+
+	for _, v := range sums {
+		if v > max {
+			max = v
+		}
+	}
+
+	result = totArrows - max
 
 	return result
 }
 
 func main() {
 
-	palabra := "aaabbbccc"
-	fmt.Println(removeThird(palabra))
+	word0 := ""
+	fmt.Println(word0, minRotArrow(word0))
 
-	palabra2 := "aaabbbcccdddd111111111222233334444///////3#####"
-	fmt.Println(removeThird(palabra2))
+	word1 := ">^<v"
+	fmt.Println(word1, minRotArrow(word1))
 
-	palabra3 := ""
-	fmt.Println(removeThird(palabra3))
+	word2 := ">>>><<<^^v"
+	fmt.Println(word2, minRotArrow(word2))
 
-	palabra4 := "aaaaaaspdghñair´85948325p98yegohdfñgh34uu45u934u598488484848484888888888afasdfas"
-	fmt.Println(removeThird(palabra4))
+	word3 := ">^<v>^<v>^<v"
+	fmt.Println(word2, minRotArrow(word3))
 
+	word4 := "^"
+	fmt.Println(word4, minRotArrow(word4))
+
+	word5 := "1234^QWER"
+	fmt.Println(word5, minRotArrow(word5))
+
+	word6 := ">^"
+	fmt.Println(word6, minRotArrow(word6))
+
+	word7 := ">^<v>^alskdj34564756/$(&%$&$&%$haksjdfh<v>^<vv"
+	fmt.Println(word7, minRotArrow(word7))
 }

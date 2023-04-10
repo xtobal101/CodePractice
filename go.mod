@@ -1,3 +1,3 @@
-module rm3rd
+module minrotarrow
 
 go 1.18
