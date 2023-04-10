@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-/* Calculate the minimal rotation of arrows to make the string all equal
+/* Calculate the minimal rotation of arrows to make them point the same
    >>><<v^ -> 4
 */
 
